@@ -1,6 +1,6 @@
 import 'package:bookly_app/config/navigation/route_constants.dart';
 import 'package:bookly_app/dependency_injection.dart';
-import 'package:bookly_app/features/boarding/presentation/splash_screen.dart';
+import 'package:bookly_app/features/boarding/splash_screen.dart';
 import 'package:bookly_app/features/view_books/presentation/book_details/book_details_page.dart';
 import 'package:bookly_app/features/view_books/presentation/book_details/cubit/book_details_cubit.dart';
 import 'package:bookly_app/features/view_books/presentation/book_details/cubit/similar_books_cubit.dart';

@@ -1,4 +1,4 @@
-part of 'package:bookly_app/features/boarding/presentation/cubit/splash_cubit.dart';
+part of 'package:bookly_app/features/boarding/cubit/splash_cubit.dart';
 
 class SplashState extends Equatable {
   @override

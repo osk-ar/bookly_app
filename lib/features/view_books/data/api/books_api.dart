@@ -26,11 +26,15 @@ class BooksApi {
         log(
           "Error -- StatusCode: ${response.statusCode}, StatusMessage: ${response.statusMessage}",
         );
+        print(
+          "Error -- StatusCode: ${response.statusCode}, StatusMessage: ${response.statusMessage}",
+        );
       }
 
       return [];
     } on Exception catch (e) {
       log(e.toString());
+      print("Error -: $e");
       return [];
     }
   }

@@ -21,39 +21,42 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+  }
 
-    Timer(const Duration(milliseconds: 300), () {
-      setState(() {
-        _animate = true;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    Future.delayed(Duration.zero, () {
+      if (mounted) {
+        setState(() => _animate = true);
+      }
+
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) {
+          Navigator.pushReplacementNamed(context, RouteConstants.homeRoute);
+        }
       });
-    });
-
-    // Navigate to next screen after some delay
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, RouteConstants.homeRoute);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(
         children: [
-          AnimatedPositioned(
+          AnimatedAlign(
             duration: const Duration(seconds: 1),
             curve: Curves.easeInOut,
-            top: _animate ? size.height / 2 - 50 : -40,
-            left: size.width / 2 - 80,
-            child: SvgPicture.asset(AssetsPaths.logo, width: 160),
+            alignment: _animate ? Alignment.center : const Alignment(0, -2),
+            child: SvgPicture.asset(AssetsPaths.logo, width: 160.w),
           ),
-          AnimatedPositioned(
+          AnimatedAlign(
             duration: const Duration(seconds: 1),
             curve: Curves.easeInOut,
-            top: _animate ? size.height / 2 : size.height + 50,
-            left: size.width / 2 - 50,
+            alignment:
+                _animate ? const Alignment(0, 0.2) : const Alignment(0, 2),
             child: Text(
               "Read Books",
               style: getMediumStyle(

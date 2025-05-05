@@ -42,8 +42,12 @@ class ImageLinks {
 
   factory ImageLinks.fromJson(Map<String, dynamic> json) {
     return ImageLinks(
-      thumbNail: json["thumbnail"] ?? "",
-      smallThumbNail: json["smallThumbnail"] ?? "",
+      thumbNail:
+          json["thumbnail"] ??
+          "http://books.google.com/books/content?id=qexu-ZE_6AEC&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE72lTBz6Pg7tgYr4ptXeYrE9kAHRm_8t1TBIA8hgrIEgHgtlYbo7xju9f1Tz9sUPtOqaiCkYHWkzK7kQYu7A_B0tpawDoYH-1l3u2OEkga_x8FvUM9nfR28Gmb2JNUhvAmzAjkRu&source=gbs_api",
+      smallThumbNail:
+          json["smallThumbnail"] ??
+          "http://books.google.com/books/content?id=qexu-ZE_6AEC&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE72lTBz6Pg7tgYr4ptXeYrE9kAHRm_8t1TBIA8hgrIEgHgtlYbo7xju9f1Tz9sUPtOqaiCkYHWkzK7kQYu7A_B0tpawDoYH-1l3u2OEkga_x8FvUM9nfR28Gmb2JNUhvAmzAjkRu&source=gbs_api",
     );
   }
 

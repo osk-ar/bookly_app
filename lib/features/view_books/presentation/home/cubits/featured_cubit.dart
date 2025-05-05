@@ -13,11 +13,14 @@ class FeaturedCubit extends Cubit<FeaturedState> {
   List<BookModel> bestSellerBooks = [];
   int bestSellerPageNumber = 1;
 
-  void loadFeatured() async {
+  Future<void> loadFeatured() async {
     emit(LoadingFeatured());
 
     final newBooks = await booksApi.getBooks(0);
     featuredBooks.addAll(newBooks);
+
+    print(newBooks.length);
+    print(featuredBooks.length);
 
     emit(LoadedFeatured(featuredBooks));
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bookly_app/config/navigation/route_constants.dart';
 import 'package:bookly_app/config/theme/text_styles.dart';
 import 'package:bookly_app/core/constants/app_colors.dart';
@@ -36,8 +38,6 @@ class _HomePageState extends State<HomePage> {
       _bestSellerCubit.loadMoreItems(_scrollController);
     });
 
-    _featuredCubit.loadFeatured();
-    _bestSellerCubit.loadBestSellers();
     super.initState();
   }
 
@@ -45,6 +45,16 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    Future.delayed(Duration.zero, () {
+      _featuredCubit.loadFeatured();
+      _bestSellerCubit.loadBestSellers();
+    });
+
+    super.didChangeDependencies();
   }
 
   @override
@@ -72,28 +82,21 @@ class _HomePageState extends State<HomePage> {
           BlocBuilder<FeaturedCubit, FeaturedState>(
             builder: (context, state) {
               switch (state) {
-                case LoadingFeatured():
-                  return SliverToBoxAdapter(
-                    child: FeaturedShimmer(height: 224.h),
-                  );
-
                 case LoadedFeatured():
+                  log("loaded Data");
+                  print("loaded Data");
                   return SliverToBoxAdapter(
                     child: FeaturedBooksSlider(
                       height: 224.h,
                       items:
                           state.books.map((book) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return FeaturedBooksItem(
-                                  imgURL: book.imageLinks.thumbNail,
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      RouteConstants.bookDetailsRoute,
-                                      arguments: book.id,
-                                    );
-                                  },
+                            return FeaturedBooksItem(
+                              imgURL: book.imageLinks.thumbNail,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  RouteConstants.bookDetailsRoute,
+                                  arguments: book.id,
                                 );
                               },
                             );

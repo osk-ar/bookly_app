@@ -14,7 +14,7 @@ class BestSellerCubit extends Cubit<BestSellerState> {
   List<BookModel> bestSellerBooks = [];
   int bestSellerPageNumber = 10;
 
-  void loadBestSellers() async {
+  Future<void> loadBestSellers() async {
     emit(LoadingBestSeller());
 
     final newBooks = await booksApi.getBooks(bestSellerPageNumber);
@@ -24,7 +24,7 @@ class BestSellerCubit extends Cubit<BestSellerState> {
     emit(LoadedBestSeller(bestSellerBooks));
   }
 
-  void _loadMoreBestSellers() async {
+  Future<void> _loadMoreBestSellers() async {
     final newBooks = await booksApi.getBooks(bestSellerPageNumber);
     bestSellerBooks.addAll(newBooks);
     bestSellerPageNumber += 10;
@@ -32,10 +32,10 @@ class BestSellerCubit extends Cubit<BestSellerState> {
     emit(LoadedBestSeller(bestSellerBooks));
   }
 
-  void loadMoreItems(ScrollController scrollController) {
+  Future<void> loadMoreItems(ScrollController scrollController) async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      _loadMoreBestSellers();
+      await _loadMoreBestSellers();
       log(bestSellerPageNumber.toString());
     }
   }

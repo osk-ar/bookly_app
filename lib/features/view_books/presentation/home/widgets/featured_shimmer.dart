@@ -26,16 +26,15 @@ class FeaturedShimmer extends StatelessWidget {
           disableCenter: true,
         ),
         items:
-            [BookModel.empty(), BookModel.empty(), BookModel.empty()].map((
-              book,
-            ) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return FeaturedBooksItem(
-                    imgURL: book.imageLinks.thumbNail,
-                    onTap: () {},
-                  );
-                },
+            [
+              BookModel.empty(),
+              BookModel.empty(),
+              BookModel.empty(),
+              BookModel.empty(),
+            ].map((book) {
+              return FeaturedBooksItem(
+                imgURL: book.imageLinks.thumbNail,
+                onTap: () {},
               );
             }).toList(),
       ),
